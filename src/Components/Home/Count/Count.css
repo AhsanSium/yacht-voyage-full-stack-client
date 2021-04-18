@@ -1,0 +1,13 @@
+.counter{
+    background-color: #5ebfe9;
+    color:#06272e;
+}
+.counter-count:after{
+    content: '~~~~';
+    display: block;
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: -.16em;
+    margin-top: -.15em;
+    color: #fff!important;
+}

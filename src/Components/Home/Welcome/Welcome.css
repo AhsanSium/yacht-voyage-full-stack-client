@@ -1,0 +1,33 @@
+.welcome-container{
+    height: 400px;
+    background-image: url(../../../images/1404.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+}
+
+.text-container{
+    position: relative;
+}
+
+.text-container:before{
+    content: ' ';
+    background-color:#125294;
+    opacity: .5;
+    display: block;
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    background-position: 50% 0;
+    border-radius: 10px;
+    
+   
+}
+.text-area{
+    color:aliceblue;
+    position: relative;
+    padding: 30px 20px;
+    
+}
+

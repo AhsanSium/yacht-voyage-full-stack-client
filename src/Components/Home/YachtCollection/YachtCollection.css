@@ -1,0 +1,26 @@
+.yacht-wrapper{
+    padding: 100px 10px;
+    background-image: url(../../../images/gleb-mishin-7xRYtIvtTvw-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.yacht-wrapper h2{
+    color:rgb(2, 54, 56);
+    background-color: rgb(170, 235, 255);
+    text-align: center;
+    display:inline-block;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 6px rgb(52 106 143);
+}
+.yacht-wrapper h2:after{
+    content: '~~~~';
+    display: block;
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: -.16em;
+    margin-top: -.15em;
+    color: rgb(0, 73, 116)!important;
+}
