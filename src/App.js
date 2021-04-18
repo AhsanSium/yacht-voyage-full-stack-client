@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 
 import './App.css';
+import Contact from './Components/Home/Contact/Contact';
+import ContactForm from './Components/Home/Contact/ContactForm/ContactForm';
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import PrivateRoute from './Components/Login/PrivateRoute';
@@ -35,6 +37,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login></Login>
+          </Route>
+          <Route path="/contact">
+          <Home></Home>
           </Route>
           <PrivateRoute path="/dashboard">
             <User></User>

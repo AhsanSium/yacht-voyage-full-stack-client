@@ -14,7 +14,7 @@ const MakeAdmin = () => {
         const formData = new FormData()
         formData.append('email', admin);
 
-        const url = 'http://localhost:5000/addAdmin';
+        const url = 'https://quiet-journey-44427.herokuapp.com/addAdmin';
 
         fetch(url, {
             method: 'POST',

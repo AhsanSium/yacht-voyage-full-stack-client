@@ -1,11 +1,11 @@
 import React from 'react';
-import BoatImg from '../../../../images/realistic-cuise-liner-luxury-voyage_208581-416.jpg';
+import BoatImg from '../../../../images/ship.png';
 const HeaderMain = () => {
     return (
-        <div className='bg-info'>
-            <div className='container-fluid row d-flex align-items-center'>
-                <div className='col-md-7 ps-5'>
-                    <img src={BoatImg} alt="" className="img-fluid"/>
+        <div className='' style={{backgroundColor:'#fff1ad78'}}>
+            <div className='container-md row d-flex align-items-center p-5'>
+                <div className='col-md-7'>
+                    <img src={BoatImg} alt="" className="img-fluid w-75"/>
                 </div>
                 <div className='col-md-5 text-start'>
                     <h1 className='fs-1'>Boats and Yachts Rentals</h1>

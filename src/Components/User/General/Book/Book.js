@@ -22,7 +22,7 @@ const Book = () => {
         const newYacht = { ...yacht };
         newYacht.isLoading = true;
         newYacht.id = yachtId;
-        fetch('http://localhost:5000/yachtById/' + yachtId)
+        fetch('https://quiet-journey-44427.herokuapp.com/yachtById/' + yachtId)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -56,7 +56,7 @@ const Book = () => {
             paymentId:paymentId};
         // const orderDetails = {products:product.data, shipment:data, user:loggedInUser, orderTime:new Date(), email:loggedInUser.email};
         console.log(bookingDetails);
-        fetch('http://localhost:5000/bookYacht', {
+        fetch('https://quiet-journey-44427.herokuapp.com/bookYacht', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingDetails)

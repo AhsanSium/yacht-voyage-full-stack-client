@@ -37,7 +37,7 @@ const AddYacht = () => {
         formData.append('speed', info.speed);
         formData.append('people', info.people);
         formData.append('bed', info.bed);
-        const url = 'http://localhost:5000/addYacht';
+        const url = 'https://quiet-journey-44427.herokuapp.com/addYacht';
         console.log(image,info);
         // console.log(data);
         fetch(url, {

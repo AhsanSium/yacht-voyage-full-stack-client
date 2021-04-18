@@ -13,7 +13,7 @@ const ManageYacht = () => {
 
     useEffect(()=>{
         setYachts({ loading: true });
-        fetch('http://localhost:5000/yachts')
+        fetch('https://quiet-journey-44427.herokuapp.com/yachts')
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -24,7 +24,7 @@ const ManageYacht = () => {
 
     const handleDelete = (id) => {
         console.log(id);
-        fetch('http://localhost:5000/delete/' + id ,{
+        fetch('https://quiet-journey-44427.herokuapp.com/delete/' + id ,{
             method:'DELETE'
         })
         .then(res => res.json())

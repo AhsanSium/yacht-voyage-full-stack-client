@@ -15,7 +15,7 @@ const BookigsList = () => {
 
     useEffect(()=>{
         setBookings({loading: true});
-        fetch('http://localhost:5000/bookings?email='+loggedInUser.email, {
+        fetch('https://quiet-journey-44427.herokuapp.com/bookings?email='+loggedInUser.email, {
             method:'GET',
             headers: {
                 'Content-Type':'application/json'

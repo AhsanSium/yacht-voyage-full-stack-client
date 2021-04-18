@@ -40,7 +40,7 @@ const UserReview = () => {
         formData.append('description', info.description);
         formData.append('rating', info.rating);
         
-        const url = 'http://localhost:5000/addReview';
+        const url = 'https://quiet-journey-44427.herokuapp.com/addReview';
         console.log(image, info);
         // console.log(data);
         fetch(url, {

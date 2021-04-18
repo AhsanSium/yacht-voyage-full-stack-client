@@ -27,7 +27,7 @@ const Login = () => {
             .then((result) => {
                 const {displayName, email} = result.user;
                 
-                fetch('http://localhost:5000/admins')
+                fetch('https://quiet-journey-44427.herokuapp.com/admins')
                 .then(res => res.json())
                 .then(data => {
                 console.log(data);

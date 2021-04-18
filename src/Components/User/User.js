@@ -11,16 +11,18 @@ import { UserContext } from '../../App';
 
 const User = () => {
 
-    const [menu, setMenu] = useState('book');
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [menu, setMenu] = useState(`${loggedInUser.admin ?'allBookingList':'book'}`);
 
     return (
         <div className='container-fluid'>
             <div className="row">
+           
                 <div className="col-3 p-0">
                     <Sidebar setMenu={setMenu}></Sidebar>
                 </div>
                 <div className='col-9'>
+                <h3 className='text-primary'>Welcome {loggedInUser.admin ? 'Admin':'User'}</h3>
                     {
                         menu === 'book' &&
                         <Book></Book>

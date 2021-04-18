@@ -95,7 +95,7 @@ const YachtCollection = () => {
 
     useEffect(()=>{
 
-        fetch('http://localhost:5000/yachts')
+        fetch('https://quiet-journey-44427.herokuapp.com/yachts')
         .then(res => res.json())
         .then(data => {
             setYacht(data);

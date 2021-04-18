@@ -35,7 +35,7 @@ const Testimonials = () => {
     const [testimonialsData, setTestimonialsData] = useState([]);
     useEffect(()=>{
 
-        fetch('http://localhost:5000/customer-reviews')
+        fetch('https://quiet-journey-44427.herokuapp.com/customer-reviews')
         .then(res => res.json())
         .then(data => {
             setTestimonialsData(data);
