@@ -5,7 +5,25 @@ import { useForm } from "react-hook-form";
 const ContactForm = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const onSubmit = data => {
+        console.log(data)
+        fetch('https://quiet-journey-44427.herokuapp.com/addContact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            response.json()
+            alert('Contact Added');
+        })
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    };
 
     return (
         <div className='container-sm w-75 mt-5'>
@@ -33,7 +51,7 @@ const ContactForm = () => {
             </div>
             <div className="col-md-12">
                 <label className="form-label badge rounded bg-primary"> Message </label>
-                <textarea placeholder="What's on your mind ..... " className="form-control" aria-label="With textarea"></textarea>
+                <textarea placeholder="What's on your mind ..... " className="form-control" aria-label="With textarea" {...register("message")}></textarea>
             </div>
             <div className="col-md-12 mt-5">    
                 <button type="button" className="btn btn-outline-success  text-light" type="submit">Submit</button>

@@ -91,18 +91,21 @@ import './YachtCollection.css';
 
 const YachtCollection = () => {
 
-    const [yacht, setYacht] = useState([]);
+    const [yacht, setYacht] = useState({
+        loading:false,
+        data:null
+    });
 
     useEffect(()=>{
-
+        setYacht({loading:true})
         fetch('https://quiet-journey-44427.herokuapp.com/yachts')
         .then(res => res.json())
         .then(data => {
-            setYacht(data);
+            setYacht({loading:false,data});
             console.log(data);
         })
         .catch(err =>{
-
+            console.log(err);
         });
 
     },[])
@@ -113,7 +116,8 @@ const YachtCollection = () => {
                 <h2>Yachts for Charter</h2>
                 <div className="row p-5 yacht-content">
                 {
-                    yacht?.map(singleYacht => <YachtCard yacht={singleYacht}></YachtCard> )
+                    yacht.loading ? <h3 className='text-center text-warning'>Loading Data</h3> :
+                    yacht.data?.map(singleYacht => <YachtCard key={singleYacht._id} yacht={singleYacht}></YachtCard> )
                 }
                 </div>
             </div>    

@@ -13,6 +13,10 @@ const BookigsList = () => {
     });
 
 
+
+    
+
+
     useEffect(()=>{
         setBookings({loading: true});
         fetch('https://quiet-journey-44427.herokuapp.com/bookings?email='+loggedInUser.email, {
@@ -50,13 +54,18 @@ const BookigsList = () => {
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {
+                        bookings.loading === true
+                        ? <h4>Loading Data</h4>:
+
+                        <tbody>
 
                         {
-                            bookings.data?.map(booking => <BookingTable booking={booking} ></BookingTable> )
+                            bookings.data?.map(booking => <BookingTable key={booking._id} booking={booking}  ></BookingTable> )
                         }
 
-                    </tbody>
+                        </tbody>
+                    }
                 </table>
         </div>
     );

@@ -24,3 +24,9 @@
     margin-top: -.15em;
     color: rgb(0, 73, 116)!important;
 }
+
+.yacht-card:hover{
+    background-color:rgb(204, 245, 247);
+    transition: .2s ease;
+    
+}

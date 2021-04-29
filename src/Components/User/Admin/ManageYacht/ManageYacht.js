@@ -42,7 +42,7 @@ const ManageYacht = () => {
                 <h3>Loading Yacht</h3>
             }
             {
-                yachts.data&&yachts.data.map(yacht => <li style={{padding:'10px'}}>Name:{yacht.name} Price:  {yacht.price} <button className='btn btn-danger' onClick={()=>handleDelete(yacht._id)}>Delete </button> </li> )
+                yachts.data&&yachts.data.map(yacht => <li key={yacht._id} style={{padding:'10px'}}>Name:{yacht.name} Price:  {yacht.price} <button className='btn btn-danger' onClick={()=>handleDelete(yacht._id)}>Delete </button> </li> )
             }
         </div>
     );

@@ -47,6 +47,7 @@ const Book = () => {
 
         console.log(shippingData);
         const bookingDetails = {
+            status:'Pending',
             username:loggedInUser.name,
             email:loggedInUser.email,
             product:product,
@@ -115,38 +116,38 @@ const Book = () => {
 
             </div>
             <div className='row'>
-                <div style={{display: shippingData ? 'none' : 'block'}} className="col-md-6 mb-5 p-5 ms-3">
+                <div style={{display: shippingData ? 'none' : 'block'}} className="col-md-12 mb-5 p-5 ms-3">
                     <h2>Your Shipment Info</h2>
                 <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
                     <div className="col-md-6">
-                        <label for="inputEmail4" className="form-label">Name</label>
+                        <label htmlFor="inputEmail4" className="form-label">Name</label>
                         <input type="text" className="form-control" id="inputName" placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
                     </div>
                     <div className="col-md-6">
-                        <label for="inputEmail4" className="form-label">Email</label>
+                        <label htmlFor="inputEmail4" className="form-label">Email</label>
                         <input type="email" className="form-control" id="inputEmail4" placeholder='E-mail' {...register("email", { required: true, maxLength: 20 })} />
                     </div>
                     <div className="col-12">
-                        <label for="inputAddress" className="form-label">Address</label>
+                        <label htmlFor="inputAddress" className="form-label">Address</label>
                         <input type="text-area" className="form-control" id="inputAddress" placeholder="Main St"  {...register("address1", { required: true, maxLength: 20 })} />
                     </div>
                     <div className="col-12">
-                        <label for="inputAddress2" className="form-label">Address 2</label>
+                        <label htmlFor="inputAddress2" className="form-label">Address 2</label>
                         <input type="text-area" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" {...register("address2", { required: true, maxLength: 20 })}/>
                     </div>
                     <div className="col-md-6">
-                        <label for="inputCity" className="form-label">City</label>
+                        <label htmlFor="inputCity" className="form-label">City</label>
                         <input type="text" className="form-control" id="inputCity" placeholder='City' {...register("city", { required: true, maxLength: 20 })}/>
                     </div>
                     
                     <div className="col-md-6">
-                        <label for="inputZip" className="form-label">Zip</label>
+                        <label htmlFor="inputZip" className="form-label">Zip</label>
                         <input type="text" className="form-control" id="inputZip" placeholder='Zip' {...register("zip", { required: true, maxLength: 20 })}/>
                     </div>
                     <div className="col-12">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="gridCheck" {...register("check", { required: true, maxLength: 20 })}/>
-                            <label className="form-check-label d-flex" for="gridCheck">
+                            <label className="form-check-label d-flex" htmlFor="gridCheck">
                                 I Agree to the terms
                             </label>
                         </div>
@@ -166,7 +167,7 @@ const Book = () => {
                 </form> */}
 
                 
-                <div style={{display: shippingData ? 'block' : 'none'}} className="col-md-6 mb-5 p-2">
+                <div style={{display: shippingData ? 'block' : 'none'}} className="col-md-12 mb-5 p-2">
                     <h2>Make Payment</h2>
                     <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
                 </div>

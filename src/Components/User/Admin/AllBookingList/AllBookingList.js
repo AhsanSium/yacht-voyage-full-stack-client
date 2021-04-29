@@ -44,15 +44,22 @@ const AllBookingList = () => {
                             <th scope="col">Price</th>
                             <th scope="col">Order Time</th>
                             <th scope="col">Status</th>
+                            {
+                                loggedInUser.admin &&
+                                <th scope="col">Change Status</th>
+                            }
                         </tr>
                     </thead>
-                    <tbody>
+                   { bookings.loading === true ? 
+                   <h4>Loading Data:</h4>:
+                   <tbody>
 
                         {
-                            bookings.data?.map(booking => <BookingTable booking={booking} ></BookingTable> )
+                            bookings.data?.map(booking => <BookingTable key={booking._id} booking={booking} ></BookingTable> )
                         }
 
                     </tbody>
+                    }
                 </table>
         </div>
     );

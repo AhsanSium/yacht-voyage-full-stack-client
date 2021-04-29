@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../images/logo.png';
+import { UserContext } from '../../../App';
+import logo from '../../../images/logo160Final.png';
 
 const TopNav = () => {
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem('token');
+        window.location.reload();
+    }
+
     return (
-        <nav className="p-4 navbar navbar-expand-lg navbar-light " style={{backgroundColor:'#ceffff'}}>
+        <nav className="pl-4 pr-4 navbar navbar-expand-lg navbar-light " style={{backgroundColor:'#ceffff'}}>
             <div className="container-fluid">
-                <Link className=" navbar-brand" to="/">
-                    <img src={logo} className='img-fluid' style={{width:'120px'}} alt=""/>
-                    Yachts Voyage
-                    </Link>
+                <Link className=" ms-5 navbar-brand" to="/">
+                    <img src={logo} className='img-fluid' alt=""/>
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -31,11 +39,22 @@ const TopNav = () => {
                             Contact
                         </button>    
                         </Link>
-                        <Link className='nav-link' to='/login'>
-                        <button className="btn btn-danger">
-                            Login
-                        </button>    
-                        </Link>
+                        
+                            {
+                                loggedInUser.email || sessionStorage.getItem('token')?
+                            <Link className='nav-link'>    
+                            <button onClick={handleLogOut} className="btn btn-danger">
+                                Logout
+                            </button>
+                            </Link> 
+                            :  
+                            <Link className='nav-link' to='/login'>
+                            <button className="btn btn-primary">
+                                Login
+                            </button>  
+                            </Link>
+                            }
+                        
                     </div>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import TopNav from '../Shared/TopNav/TopNav';
 import { UserContext } from '../../App';
+
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -44,10 +45,12 @@ const Login = () => {
                 if(admin === true){
                     const signedInUser = {name: displayName, email, admin:true}
                     setLoggedInUser(signedInUser);
+                    storeAuthToken(admin);
                 }
                 else{
                     const signedInUser = {name: displayName, email, admin:false}
                     setLoggedInUser(signedInUser);
+                    storeAuthToken(admin);
                     
                 }
                 console.log(admin);
@@ -57,7 +60,6 @@ const Login = () => {
                 });
                 
                 console.log(loggedInUser);
-                storeAuthToken();
 
             }).catch((error) => {
                 const errorMessage = error.message;
@@ -65,10 +67,11 @@ const Login = () => {
             });
     }
 
-    const storeAuthToken = () => {
+    const storeAuthToken = (admin) => {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
         .then(function(idToken) {
-            sessionStorage.setItem('token', idToken);
+            sessionStorage.setItem('token', idToken,'admin',admin);
+            sessionStorage.setItem('admin',admin);
             history.replace(from);
           }).catch(function(error) {
             // Handle error
@@ -80,7 +83,12 @@ const Login = () => {
         <div>
             <TopNav></TopNav>
             <h3>This is Login</h3>
-            <button className="btn btn-danger" onClick={handleGoogleSignIn}>Login With Google</button>
+            {
+                loggedInUser.email ?
+                <Link to='/dashboard'>Dashboard</Link> :
+                <button className="btn btn-danger" onClick={handleGoogleSignIn}>Login With Google</button>
+
+            }
         </div>
     );
 };

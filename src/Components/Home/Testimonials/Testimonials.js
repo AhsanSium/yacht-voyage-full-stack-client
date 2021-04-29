@@ -51,7 +51,7 @@ const Testimonials = () => {
             <h2> Customer Review </h2>
             <div className='row p-2 mt-5'>
                 {
-                    testimonialsData.map(data => <TestimonialCard data={data}></TestimonialCard> )
+                    testimonialsData.map(data => <TestimonialCard key={data._id} data={data}></TestimonialCard> )
                 }
             </div>
         </div>

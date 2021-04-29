@@ -6,8 +6,8 @@ const YachtCard = ({yacht}) => {
         <div className="col-md-6  mt-2 ">
 
                    
-        <div className="card h-100">
-        <Link className="nav-link" to={`/yachtBooking/${yacht._id}`}>
+        <div className="card h-100 yacht-card">
+        <Link className="nav-link " to={`/yachtBooking/${yacht._id}`}>
                 <img src={`data:image/jpeg;base64,${yacht.image.img}`} alt="" className="card-img"/>
                     <div className="card-body text-center">
                         <h5 style={{color:'#125294'}} className="card-title">{yacht.name}</h5>

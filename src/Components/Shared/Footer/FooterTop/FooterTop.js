@@ -5,7 +5,24 @@ import { useForm } from "react-hook-form";
 const FooterTop = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data)
+        fetch('https://quiet-journey-44427.herokuapp.com/addNewsLetter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            response.json()
+            alert('Email Added');
+        })
+        .then(data => {
+          console.log(data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    };
 
     return (
         <div className=' p-3 pt-5'>
