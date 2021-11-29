@@ -1,3 +1,6 @@
+import ErrorPage from 'Components/404Page/ErrorPage';
+import TwoColContactUsWithIllustrationFullForm from 'Components/forms/TwoColContactUsWithIllustrationFullForm';
+import NewLogin from 'Components/Login/NewLogin';
 import React, { createContext, useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -9,6 +12,7 @@ import './App.css';
 import Contact from './Components/Home/Contact/Contact';
 import ContactForm from './Components/Home/Contact/ContactForm/ContactForm';
 import Home from "./Components/Home/Home";
+import Home2 from './Components/Home/Home2';
 import Login from "./Components/Login/Login";
 import PrivateRoute from './Components/Login/PrivateRoute';
 import AllBookingList from './Components/User/Admin/AllBookingList/AllBookingList';
@@ -17,10 +21,12 @@ import User from "./Components/User/User";
 
 export const UserContext = createContext();
 
+
 function App() {
 
-  const [loggedInUser, setLoggedInUser] = useState({});
-
+  const user = JSON.parse(sessionStorage.getItem('user')) || {};
+  //console.log(user);
+  const [loggedInUser, setLoggedInUser] = useState(user);
   return (
     <div className="App">
       <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
@@ -30,16 +36,22 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
-            <Home></Home>
+            <Home2></Home2>
           </Route>
+          {/* <Route exact path="/home">
+            <Home></Home>
+          </Route> */}
           <Route exact path="/home">
-            <Home></Home>
+            <Home2></Home2>
           </Route>
-          <Route path="/login">
+          {/* <Route path="/login">
             <Login></Login>
+          </Route> */}
+          <Route path="/login">
+            <NewLogin></NewLogin>
           </Route>
           <Route path="/contact">
-          <Home></Home>
+            <TwoColContactUsWithIllustrationFullForm/>
           </Route>
           <PrivateRoute path="/dashboard">
             <User></User>
@@ -51,7 +63,7 @@ function App() {
             <AllBookingList></AllBookingList>
           </PrivateRoute> */}
           <Route  path="*">
-              <h3>404 Error</h3>
+              <ErrorPage />
           </Route>
         </Switch>
       </div>
@@ -62,3 +74,5 @@ function App() {
 }
 
 export default App;
+
+console.log('Developed BY ___ AHSAN SIUM ==> https://www.linkedin.com/in/ahsan-sium/  <==');

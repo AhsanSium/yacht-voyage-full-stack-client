@@ -31,12 +31,12 @@ const Login = () => {
                 fetch('https://quiet-journey-44427.herokuapp.com/admins')
                 .then(res => res.json())
                 .then(data => {
-                console.log(data);
+                //console.log(data);
                 let admin = false;
                 // console.log(data.some( signedInUser.email));
                 data.map(singleData => {
-                    console.log(singleData);
-                    console.log('Outside If',result.user.email, singleData.email);
+                    //console.log(singleData);
+                    //console.log('Outside If',result.user.email, singleData.email);
                     if(singleData.email === result.user.email){
                         console.log('Inside If',singleData.email, result.user.email);
                         admin = true;
@@ -53,13 +53,13 @@ const Login = () => {
                     storeAuthToken(admin);
                     
                 }
-                console.log(admin);
+                //console.log(admin);
                 })
                 .catch(err =>{
 
                 });
                 
-                console.log(loggedInUser);
+                //console.log(loggedInUser);
 
             }).catch((error) => {
                 const errorMessage = error.message;

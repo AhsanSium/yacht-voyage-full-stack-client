@@ -1,3 +1,4 @@
+import { PrimaryButton } from 'Components/misc/Buttons';
 import React from 'react';
 import { useForm } from "react-hook-form";
 
@@ -18,7 +19,7 @@ const ContactForm = () => {
             alert('Contact Added');
         })
         .then(data => {
-            console.log(data)
+            //console.log(data)
         })
         .catch(error => {
             console.error(error)
@@ -53,8 +54,10 @@ const ContactForm = () => {
                 <label className="form-label badge rounded bg-primary"> Message </label>
                 <textarea placeholder="What's on your mind ..... " className="form-control" aria-label="With textarea" {...register("message")}></textarea>
             </div>
-            <div className="col-md-12 mt-5">    
-                <button type="button" className="btn btn-outline-success  text-light" type="submit">Submit</button>
+            <div className="col-md-12 mt-5">
+                <PrimaryButton type="button">
+                    Submit    
+                </PrimaryButton>    
                 {/* <input className="form-control " type="submit" /> */}
             </div>
             </form>

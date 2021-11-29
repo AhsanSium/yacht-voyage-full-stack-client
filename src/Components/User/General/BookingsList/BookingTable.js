@@ -3,12 +3,12 @@ import { UserContext } from '../../../../App';
 
 const BookingTable = ({ booking }) => {
 
-    console.log(booking)
+    //console.log(booking)
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const handleStatusChange = ( id, event) => {
-        console.log(id,event.target.value);
+        //console.log(id,event.target.value);
 
         const data = {id: id, status: event.target.value};
 
@@ -20,7 +20,7 @@ const BookingTable = ({ booking }) => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result);
+                //console.log(result);
                 alert('Product Updated');
             })
             .catch(err => {

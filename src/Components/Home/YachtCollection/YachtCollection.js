@@ -102,10 +102,10 @@ const YachtCollection = () => {
         .then(res => res.json())
         .then(data => {
             setYacht({loading:false,data});
-            console.log(data);
+            //console.log(data);
         })
         .catch(err =>{
-            console.log(err);
+            //console.log(err);
         });
 
     },[])

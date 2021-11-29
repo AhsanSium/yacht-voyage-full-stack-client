@@ -6,7 +6,7 @@ const FooterTop = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        //console.log(data)
         fetch('https://quiet-journey-44427.herokuapp.com/addNewsLetter', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -17,7 +17,7 @@ const FooterTop = () => {
             alert('Email Added');
         })
         .then(data => {
-          console.log(data)
+          //console.log(data)
         })
         .catch(error => {
           console.error(error)

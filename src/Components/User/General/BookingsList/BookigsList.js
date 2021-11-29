@@ -27,20 +27,16 @@ const BookigsList = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(bookings);
+            // console.log(bookings);
             setBookings({loading:false, data:data})
         });
-    },[])
+    },[setBookings])
 
     const {id} = useParams();
 
     return (
-        <div className='row'>
+        <div className='container row mt-5 mb-5 pt-5'>
             <h3>Bookings List</h3>
-            <h3>This is Bookings:  {bookings[0]?.email}</h3>
-            {
-                console.log(bookings)
-            }
             <table className="table">
                     {
                         console.log(bookings?.data)

@@ -86,11 +86,13 @@ const Book = () => {
     const image = yacht.data?.image?.img;
 
     return (
-        <div className=''>
+        <div className='container'>
             <h3>Book Now</h3>
             <div className="">
-                <img src={`data:image/jpeg;base64,${image}`} alt="" className="img-fluid w-50 rounded" />
-                <table className="table">
+                <div className="placeholder-glow">
+                    <img src={`data:image/jpeg;base64,${image}`} alt="" className="img-fluid w-50 rounded" />
+                </div>
+                <table className="table table-stripe">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
@@ -120,12 +122,27 @@ const Book = () => {
                     <h2>Your Shipment Info</h2>
                 <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
                     <div className="col-md-6">
-                        <label htmlFor="inputEmail4" className="form-label">Name</label>
+                        <label htmlFor="inputName" className="form-label">Name</label>
                         <input type="text" className="form-control" id="inputName" placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
                     </div>
                     <div className="col-md-6">
-                        <label htmlFor="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4" placeholder='E-mail' {...register("email", { required: true, maxLength: 20 })} />
+                        <label htmlFor="inputEmail" className="form-label">Email</label>
+                        
+                        {/* <input type="email" className="form-control" id="inputEmail" placeholder='E-mail' {...register("email", { required: true, maxLength: 20 })} /> */}
+
+                        <input
+                            id="inputEmail" placeholder='E-mail'
+                            className="form-control"
+                            type="email"
+                            {...register("email", {
+                            required: "Required",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "invalid email address"
+                            }
+                            })}
+                        />
+                        
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputAddress" className="form-label">Address</label>
@@ -169,7 +186,7 @@ const Book = () => {
                 
                 <div style={{display: shippingData ? 'block' : 'none'}} className="col-md-12 mb-5 p-2">
                     <h2>Make Payment</h2>
-                    <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
+                    <ProcessPayment style={{width:'200px', color:'white'}} handlePayment={handlePaymentSuccess}></ProcessPayment>
                 </div>
             </div>
         </div>

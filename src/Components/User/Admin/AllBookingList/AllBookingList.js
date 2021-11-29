@@ -23,7 +23,7 @@ const AllBookingList = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(bookings);
+            //console.log(bookings);
             setBookings({loading:false, data:data})
         });
     },[])
@@ -35,7 +35,7 @@ const AllBookingList = () => {
             <h3>This is All booking List</h3>
             <table className="table">
                     {
-                        console.log(bookings?.data)
+                        //console.log(bookings?.data)
                     }
                     <thead>
                         <tr>

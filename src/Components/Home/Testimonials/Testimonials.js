@@ -39,10 +39,10 @@ const Testimonials = () => {
         .then(res => res.json())
         .then(data => {
             setTestimonialsData(data);
-            console.log(data);
+            //console.log(data);
         })
         .catch(err =>{
-            console.log(err);
+            //console.log(err);
         });
     },[])
 

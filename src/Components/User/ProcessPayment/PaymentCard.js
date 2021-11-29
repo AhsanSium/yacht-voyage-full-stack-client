@@ -45,7 +45,7 @@ const PaymentCard = ({handlePayment}) => {
     } else {
         setPaymentError(null);
         setPaymentSuccess(paymentMethod.id);
-      console.log('[PaymentMethod]', paymentMethod);
+      //console.log('[PaymentMethod]', paymentMethod);
         handlePayment(paymentMethod.id);
     }
   };

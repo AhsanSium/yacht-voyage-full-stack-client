@@ -23,13 +23,13 @@ const ManageYacht = () => {
     },[setYachts])
 
     const handleDelete = (id) => {
-        console.log(id);
+        //console.log(id);
         fetch('https://quiet-journey-44427.herokuapp.com/delete/' + id ,{
             method:'DELETE'
         })
         .then(res => res.json())
         .then(result => {
-            console.log(result, 'Deleted');
+            //console.log(result, 'Deleted');
             alert('Product Deleted');
         })
     }

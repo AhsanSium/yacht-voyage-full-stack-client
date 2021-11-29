@@ -14,7 +14,7 @@ const UserReview = () => {
     const handleImageUpload = (event) => {
         const newFile = event.target.files[0];
         setImage(newFile);
-        console.log(image);
+        //console.log(image);
     }
 
     const handleBlur = (event) => {
@@ -24,7 +24,7 @@ const UserReview = () => {
         else{
             
             const newInfo = { ...info };
-            console.log(event.target.name, event.target.value);
+            //console.log(event.target.name, event.target.value);
             newInfo[event.target.name] = event.target.value;
             setInfo(newInfo);
         }
@@ -41,7 +41,7 @@ const UserReview = () => {
         formData.append('rating', info.rating);
         
         const url = 'https://quiet-journey-44427.herokuapp.com/addReview';
-        console.log(image, info);
+        //console.log(image, info);
         // console.log(data);
         fetch(url, {
             method: 'POST',
@@ -52,7 +52,7 @@ const UserReview = () => {
                 alert('Review Submitted');
             })
             .then(data => {
-                console.log(data)
+                //console.log(data)
             })
             .catch(error => {
                 console.error(error)
@@ -60,8 +60,8 @@ const UserReview = () => {
     };
 
     return (
-        <div>
-            <h3>This is User Review</h3>
+        <div className='container mt-5'>
+            <h5> Please Give us a Review</h5>
             <form className="row g-3" onSubmit={handleSubmit}>
                 <div className="col-md-6">
                     <label className="form-label badge rounded bg-primary">Name</label>

@@ -25,7 +25,7 @@ const MakeAdmin = () => {
             alert('Admin Added');
         })
         .then(data => {
-          console.log(data)
+          //console.log(data)
         })
         .catch(error => {
           console.error(error)
