@@ -33,25 +33,25 @@ import './Testimonials.css';
 const Testimonials = () => {
 
     const [testimonialsData, setTestimonialsData] = useState([]);
-    useEffect(()=>{
+    useEffect(() => {
 
-        fetch('https://quiet-journey-44427.herokuapp.com/customer-reviews')
-        .then(res => res.json())
-        .then(data => {
-            setTestimonialsData(data);
-            //console.log(data);
-        })
-        .catch(err =>{
-            //console.log(err);
-        });
-    },[])
+        fetch('https://yacht-voyage-server.onrender.com/customer-reviews')
+            .then(res => res.json())
+            .then(data => {
+                setTestimonialsData(data);
+                //console.log(data);
+            })
+            .catch(err => {
+                //console.log(err);
+            });
+    }, [])
 
     return (
-        <div className='p-3 pt-5 pb-5' style={{backgroundColor:'#00d4ff8c'}}>
+        <div className='p-3 pt-5 pb-5' style={{ backgroundColor: '#00d4ff8c' }}>
             <h2> Customer Review </h2>
             <div className='row p-2 mt-5'>
                 {
-                    testimonialsData.map(data => <TestimonialCard key={data._id} data={data}></TestimonialCard> )
+                    testimonialsData.map(data => <TestimonialCard key={data._id} data={data}></TestimonialCard>)
                 }
             </div>
         </div>

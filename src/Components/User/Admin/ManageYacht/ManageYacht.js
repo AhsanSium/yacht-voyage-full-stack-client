@@ -11,27 +11,27 @@ const ManageYacht = () => {
     // const location = useLocation();
     // const { from } = location.state || { from: { pathname: "/" } };
 
-    useEffect(()=>{
+    useEffect(() => {
         setYachts({ loading: true });
-        fetch('https://quiet-journey-44427.herokuapp.com/yachts')
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setYachts({ loading: false, data:data });
-        })
-        .catch(err => console.log(err));
-    },[setYachts])
+        fetch('https://yacht-voyage-server.onrender.com/yachts')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setYachts({ loading: false, data: data });
+            })
+            .catch(err => console.log(err));
+    }, [setYachts])
 
     const handleDelete = (id) => {
         //console.log(id);
-        fetch('https://quiet-journey-44427.herokuapp.com/delete/' + id ,{
-            method:'DELETE'
+        fetch('https://yacht-voyage-server.onrender.com/delete/' + id, {
+            method: 'DELETE'
         })
-        .then(res => res.json())
-        .then(result => {
-            //console.log(result, 'Deleted');
-            alert('Product Deleted');
-        })
+            .then(res => res.json())
+            .then(result => {
+                //console.log(result, 'Deleted');
+                alert('Product Deleted');
+            })
     }
 
     return (
@@ -42,7 +42,7 @@ const ManageYacht = () => {
                 <h3>Loading Yacht</h3>
             }
             {
-                yachts.data&&yachts.data.map(yacht => <li key={yacht._id} style={{padding:'10px'}}>Name:{yacht.name} Price:  {yacht.price} <button className='btn btn-danger' onClick={()=>handleDelete(yacht._id)}>Delete </button> </li> )
+                yachts.data && yachts.data.map(yacht => <li key={yacht._id} style={{ padding: '10px' }}>Name:{yacht.name} Price:  {yacht.price} <button className='btn btn-danger' onClick={() => handleDelete(yacht._id)}>Delete </button> </li>)
             }
         </div>
     );

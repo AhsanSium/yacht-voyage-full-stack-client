@@ -11,7 +11,7 @@ import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container as ContainerBase } from "../misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
-import {css} from "styled-components/macro"; //eslint-disable-line
+import { css } from "styled-components/macro"; //eslint-disable-line
 import illustration from "../../images/Forgot password-rafiki.svg";
 import logo from "../../images/logo-tp.png";
 import googleIconImageSrc from "../../images/google-icon.png";
@@ -67,7 +67,7 @@ if (!firebase.apps.length) {
 }
 
 export default ({
-  
+
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
   headingText = "Sign In",
@@ -91,326 +91,326 @@ export default ({
 }) => {
 
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const history = useHistory();
-    const location = useLocation();
-    const { from } = location.state || { from: { pathname: "/" } };
-    const [newUser, setNewUser] = useState(false);
-    const [loginData, setLoginData] = useState({
-      userName:'',
-      email:'',
-      password:''
-    });
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+  const [newUser, setNewUser] = useState(false);
+  const [loginData, setLoginData] = useState({
+    userName: '',
+    email: '',
+    password: ''
+  });
 
 
-    const handleGoogleSignIn = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth()
-            .signInWithPopup(provider)
-            .then((result) => {
-                const {displayName, email} = result.user;
-                
-                fetch('https://quiet-journey-44427.herokuapp.com/admins')
-                .then(res => res.json())
-                .then(data => {
-                //console.log(data);
-                let admin = false;
-                // console.log(data.some( signedInUser.email));
-                data.map(singleData => {
+  const handleGoogleSignIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        const { displayName, email } = result.user;
 
-                    if(singleData.email === result.user.email){
-                        admin = true;
-                    }
-                })
-                if(admin === true){
-                    const signedInUser = {name: displayName, email, admin:true}
-                    setLoggedInUser(signedInUser);
-                    storeAuthToken(admin);
-                    setUserToSession(signedInUser);
-                }
-                else{
-                    const signedInUser = {name: displayName, email, admin:false}
-                    setLoggedInUser(signedInUser);
-                    storeAuthToken(admin);
-                    setUserToSession(signedInUser);
-                }
-                //console.log(admin);
-                })
-                .catch(err =>{
+        fetch('https://yacht-voyage-server.onrender.com/admins')
+          .then(res => res.json())
+          .then(data => {
+            //console.log(data);
+            let admin = false;
+            // console.log(data.some( signedInUser.email));
+            data.map(singleData => {
 
-                });
-                
-                //console.log(loggedInUser);
+              if (singleData.email === result.user.email) {
+                admin = true;
+              }
+            })
+            if (admin === true) {
+              const signedInUser = { name: displayName, email, admin: true }
+              setLoggedInUser(signedInUser);
+              storeAuthToken(admin);
+              setUserToSession(signedInUser);
+            }
+            else {
+              const signedInUser = { name: displayName, email, admin: false }
+              setLoggedInUser(signedInUser);
+              storeAuthToken(admin);
+              setUserToSession(signedInUser);
+            }
+            //console.log(admin);
+          })
+          .catch(err => {
 
-            }).catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-            });
-    }
-
-    const storeAuthToken = (admin) => {
-        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
-        .then(function(idToken) {
-            sessionStorage.setItem('token', idToken,'admin',admin);
-            sessionStorage.setItem('admin',admin);
-            history.replace(from);
-          }).catch(function(error) {
-            // Handle error
           });
-    }
 
-    const handleChange = (e) => {
-      const newLoginData = {...loginData};
-      newLoginData[e.target.name] = e.target.value;
-      setLoginData(newLoginData);
-    }
+        //console.log(loggedInUser);
 
-    const handleFormSubmit = (event) => {
-      event.preventDefault();
-      const name = loginData.userName;
-      const email = loginData.email;
-      const password = loginData.password;
+      }).catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  }
 
-      // firebase.auth.createUserWithEmailAndPassword(email, password)
-      // .then((userCredential) => {
-      //   // Signed in 
-      //   const user = userCredential.user;
-      //   // ...
-      //   console.log(user);
-      // })
-      // .catch((error) => {
-      //   const errorCode = error.code;
-      //   const errorMessage = error.message;
-      //   // ..
-      // });
+  const storeAuthToken = (admin) => {
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+      .then(function (idToken) {
+        sessionStorage.setItem('token', idToken, 'admin', admin);
+        sessionStorage.setItem('admin', admin);
+        history.replace(from);
+      }).catch(function (error) {
+        // Handle error
+      });
+  }
 
-      if(newUser){
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+  const handleChange = (e) => {
+    const newLoginData = { ...loginData };
+    newLoginData[e.target.name] = e.target.value;
+    setLoginData(newLoginData);
+  }
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const name = loginData.userName;
+    const email = loginData.email;
+    const password = loginData.password;
+
+    // firebase.auth.createUserWithEmailAndPassword(email, password)
+    // .then((userCredential) => {
+    //   // Signed in 
+    //   const user = userCredential.user;
+    //   // ...
+    //   console.log(user);
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   // ..
+    // });
+
+    if (newUser) {
+      firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-        // Signed in 
+          // Signed in 
           const user = userCredential.user;
           // console.log(user);
           const loginName = loginData.userName;
           updateUserName(loginName);
 
-          const {displayName, email} = user;
-                
-          fetch('https://quiet-journey-44427.herokuapp.com/admins')
-          .then(res => res.json())
-          .then(data => {
-          // console.log(data);
-          let admin = false;
-          // console.log(data.some( signedInUser.email));
-          data.map(singleData => {
+          const { displayName, email } = user;
 
-              if(singleData.email === user.email){
+          fetch('https://yacht-voyage-server.onrender.com/admins')
+            .then(res => res.json())
+            .then(data => {
+              // console.log(data);
+              let admin = false;
+              // console.log(data.some( signedInUser.email));
+              data.map(singleData => {
+
+                if (singleData.email === user.email) {
                   admin = true;
+                }
+              })
+              if (admin === true) {
+                const signedInUser = { name: loginName, email, admin: true }
+
+                setLoggedInUser(signedInUser);
+                storeAuthToken(admin);
+                setUserToSession(signedInUser);
               }
-          })
-          if(admin === true){
-              const signedInUser = {name: loginName, email, admin:true}
-              
-              setLoggedInUser(signedInUser);
-              storeAuthToken(admin);
-              setUserToSession(signedInUser);
-          }
-          else{
-              const signedInUser = {name: loginName, email, admin:false}
+              else {
+                const signedInUser = { name: loginName, email, admin: false }
 
-              setLoggedInUser(signedInUser);
-              storeAuthToken(admin);
-              setUserToSession(signedInUser);
-          }
-          //console.log(admin);
-          })
-          .catch(err =>{
+                setLoggedInUser(signedInUser);
+                storeAuthToken(admin);
+                setUserToSession(signedInUser);
+              }
+              //console.log(admin);
+            })
+            .catch(err => {
 
-          });
-          
+            });
+
           // console.log(loggedInUser);
-        
-        alert(`Welcome ${loginName}`);
-        // ...
+
+          alert(`Welcome ${loginName}`);
+          // ...
         })
         .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert(errorMessage,'Error Code ', errorCode);
-        // console.log(error);
-        // ..
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          alert(errorMessage, 'Error Code ', errorCode);
+          // console.log(error);
+          // ..
         });
-      }
+    }
 
-      if(!newUser){
-        firebase.auth().signInWithEmailAndPassword(email, password)
-             .then(res => {
-              const user = res.user;
-              // console.log(user);
-    
-              const {displayName, email} = user;
+    if (!newUser) {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(res => {
+          const user = res.user;
+          // console.log(user);
 
-              // console.log(user);
-                    
-              fetch('https://quiet-journey-44427.herokuapp.com/admins')
-              .then(res => res.json())
-              .then(data => {
+          const { displayName, email } = user;
+
+          // console.log(user);
+
+          fetch('https://yacht-voyage-server.onrender.com/admins')
+            .then(res => res.json())
+            .then(data => {
               //console.log(data);
               let admin = false;
               // console.log(data.some( signedInUser.email));
               data.map(singleData => {
-    
-                  if(singleData.email === user.email){
-                      admin = true;
-                  }
+
+                if (singleData.email === user.email) {
+                  admin = true;
+                }
               })
-              if(admin === true){
-                  const signedInUser = {name: displayName, email, admin:true}
-                  setLoggedInUser(signedInUser);
-                  updateUserName(name);
-                  storeAuthToken(admin);
-                  setUserToSession(signedInUser);
+              if (admin === true) {
+                const signedInUser = { name: displayName, email, admin: true }
+                setLoggedInUser(signedInUser);
+                updateUserName(name);
+                storeAuthToken(admin);
+                setUserToSession(signedInUser);
               }
-              else{
-                  const signedInUser = {name: displayName, email, admin:false}
-                  setLoggedInUser(signedInUser);
-                  updateUserName(name);
-                  storeAuthToken(admin);
-                  setUserToSession(signedInUser);
+              else {
+                const signedInUser = { name: displayName, email, admin: false }
+                setLoggedInUser(signedInUser);
+                updateUserName(name);
+                storeAuthToken(admin);
+                setUserToSession(signedInUser);
               }
               //console.log(admin);
-              })
-              .catch(err =>{
-    
-              });
-              
-              // console.log(loggedInUser);
-            
-            alert('Logged In ',loggedInUser.email);
-             })
-            .catch((error) => {
-              const newUserInfo = {};
-              newUserInfo.error = error.message;
-              newUserInfo.success = false;
-              setLoggedInUser(newUserInfo);
-              alert(error.message);
+            })
+            .catch(err => {
+
             });
-      }
-    }
 
-    // const signInWithEmailAndPassword = (email, password) => {
-    //   return firebase.auth().signInWithEmailAndPassword(email, password)
-    //          .then(res => {
-    //            const newUserInfo = res.user;
-    //            newUserInfo.error = '';
-    //            newUserInfo.success = true;
-    //            return newUserInfo;
-    //          })
-    //          .catch((error) => {
-    //            const newUserInfo = {};
-    //            newUserInfo.error = error.message;
-    //            newUserInfo.success = false;
-    //            return newUserInfo;
-    //          });
-    // }
+          // console.log(loggedInUser);
 
-    const updateUserName = name => {
-      const user = firebase.auth().currentUser;
-
-        user.updateProfile({
-          displayName: name,
-        }).then(function() {
-          // console.log(user,name);
-        }).catch(function(error) {
-          console.log(error);
+          alert('Logged In ', loggedInUser.email);
+        })
+        .catch((error) => {
+          const newUserInfo = {};
+          newUserInfo.error = error.message;
+          newUserInfo.success = false;
+          setLoggedInUser(newUserInfo);
+          alert(error.message);
         });
     }
+  }
 
-    const setUserToSession = user => {
-      sessionStorage.setItem('user',JSON.stringify(user));
-    }
-  
-  
-  return(
+  // const signInWithEmailAndPassword = (email, password) => {
+  //   return firebase.auth().signInWithEmailAndPassword(email, password)
+  //          .then(res => {
+  //            const newUserInfo = res.user;
+  //            newUserInfo.error = '';
+  //            newUserInfo.success = true;
+  //            return newUserInfo;
+  //          })
+  //          .catch((error) => {
+  //            const newUserInfo = {};
+  //            newUserInfo.error = error.message;
+  //            newUserInfo.success = false;
+  //            return newUserInfo;
+  //          });
+  // }
+
+  const updateUserName = name => {
+    const user = firebase.auth().currentUser;
+
+    user.updateProfile({
+      displayName: name,
+    }).then(function () {
+      // console.log(user,name);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  const setUserToSession = user => {
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
+
+
+  return (
     <AnimationRevealPage>
-    <Container>
-      <Content>
-        <MainContainer>
-          <LogoLink href={logoLinkUrl}>
-            <LogoImage src={logo} />
-          </LogoLink>
-          <MainContent>
-            <Heading>{headingText}</Heading>
-            <FormContainer>
-              <SocialButtonsContainer>
-                {socialButtons.map((socialButton, index) => (
-                  <SocialButton
-                  onClick={handleGoogleSignIn}
-                  key={index}>
-                    <span className="iconContainer">
-                      <img src={socialButton.iconImageSrc} className="icon" alt=""/>
-                    </span>
-                    <span className="text">{socialButton.text}</span>
-                  </SocialButton>
-                ))}
-              </SocialButtonsContainer>
-              <DividerTextContainer>
-                <DividerText>Or Sign in with your e-mail</DividerText>
-              </DividerTextContainer>
-              <Form onSubmit={handleFormSubmit}>
-                {
-                  newUser &&
+      <Container>
+        <Content>
+          <MainContainer>
+            <LogoLink href={logoLinkUrl}>
+              <LogoImage src={logo} />
+            </LogoLink>
+            <MainContent>
+              <Heading>{headingText}</Heading>
+              <FormContainer>
+                <SocialButtonsContainer>
+                  {socialButtons.map((socialButton, index) => (
+                    <SocialButton
+                      onClick={handleGoogleSignIn}
+                      key={index}>
+                      <span className="iconContainer">
+                        <img src={socialButton.iconImageSrc} className="icon" alt="" />
+                      </span>
+                      <span className="text">{socialButton.text}</span>
+                    </SocialButton>
+                  ))}
+                </SocialButtonsContainer>
+                <DividerTextContainer>
+                  <DividerText>Or Sign in with your e-mail</DividerText>
+                </DividerTextContainer>
+                <Form onSubmit={handleFormSubmit}>
+                  {
+                    newUser &&
+                    <Input
+                      onChange={handleChange} type="text" name='userName' placeholder="User Name" required />
+                  }
                   <Input
-                  onChange={handleChange} type="text" name='userName' placeholder="User Name" required/>
-                }
-                <Input
-                onChange={handleChange}
-                type="email" placeholder="Email" name='email' required />
-                <Input
-                onChange={handleChange}
-                type="password" placeholder="Password" name='password' required />
-                {
-                  newUser ?
-                  <SubmitButton type="submit">
-                  <SubmitButtonIcon className="icon" />
-                    <span className="text"> Sign Up </span>
-                  </SubmitButton>
-                  :
+                    onChange={handleChange}
+                    type="email" placeholder="Email" name='email' required />
+                  <Input
+                    onChange={handleChange}
+                    type="password" placeholder="Password" name='password' required />
+                  {
+                    newUser ?
+                      <SubmitButton type="submit">
+                        <SubmitButtonIcon className="icon" />
+                        <span className="text"> Sign Up </span>
+                      </SubmitButton>
+                      :
 
-                  <SubmitButton 
-                  type="submit">
-                    <SubmitButtonIcon className="icon" />
-                    <span className="text">Sign In </span>
-                  </SubmitButton>
+                      <SubmitButton
+                        type="submit">
+                        <SubmitButtonIcon className="icon" />
+                        <span className="text">Sign In </span>
+                      </SubmitButton>
 
-                }
+                  }
 
-              </Form>
-              {/* <p tw="mt-6 text-xs text-gray-600 text-center">
+                </Form>
+                {/* <p tw="mt-6 text-xs text-gray-600 text-center">
                 <a tw="border-b border-gray-500">
                   Forgot Password ?
                 </a>
               </p> */}
-              <p tw="mt-8 text-sm text-gray-600 text-center">
-                {
-                  newUser ? 'Go back to ' :
-                  'Dont have an account? '
-                }
-                <p tw="border-b text-primary-600 border-gray-500 cursor-pointer"
-                  onClick={()=>setNewUser(!newUser)}
-                >
+                <p tw="mt-8 text-sm text-gray-600 text-center">
                   {
-                    newUser ? 'Sign In' : 'Sign Up'
+                    newUser ? 'Go back to ' :
+                      'Dont have an account? '
                   }
+                  <p tw="border-b text-primary-600 border-gray-500 cursor-pointer"
+                    onClick={() => setNewUser(!newUser)}
+                  >
+                    {
+                      newUser ? 'Sign In' : 'Sign Up'
+                    }
+                  </p>
                 </p>
-              </p>
-            </FormContainer>
-          </MainContent>
-        </MainContainer>
-        <IllustrationContainer>
-          <IllustrationImage imageSrc={illustrationImageSrc} />
-        </IllustrationContainer>
-      </Content>
-    </Container>
-  </AnimationRevealPage>
-);
+              </FormContainer>
+            </MainContent>
+          </MainContainer>
+          <IllustrationContainer>
+            <IllustrationImage imageSrc={illustrationImageSrc} />
+          </IllustrationContainer>
+        </Content>
+      </Container>
+    </AnimationRevealPage>
+  );
 }

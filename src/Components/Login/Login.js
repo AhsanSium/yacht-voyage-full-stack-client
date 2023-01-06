@@ -26,39 +26,39 @@ const Login = () => {
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
-                const {displayName, email} = result.user;
-                
-                fetch('https://quiet-journey-44427.herokuapp.com/admins')
-                .then(res => res.json())
-                .then(data => {
-                //console.log(data);
-                let admin = false;
-                // console.log(data.some( signedInUser.email));
-                data.map(singleData => {
-                    //console.log(singleData);
-                    //console.log('Outside If',result.user.email, singleData.email);
-                    if(singleData.email === result.user.email){
-                        console.log('Inside If',singleData.email, result.user.email);
-                        admin = true;
-                    }
-                })
-                if(admin === true){
-                    const signedInUser = {name: displayName, email, admin:true}
-                    setLoggedInUser(signedInUser);
-                    storeAuthToken(admin);
-                }
-                else{
-                    const signedInUser = {name: displayName, email, admin:false}
-                    setLoggedInUser(signedInUser);
-                    storeAuthToken(admin);
-                    
-                }
-                //console.log(admin);
-                })
-                .catch(err =>{
+                const { displayName, email } = result.user;
 
-                });
-                
+                fetch('https://yacht-voyage-server.onrender.com/admins')
+                    .then(res => res.json())
+                    .then(data => {
+                        //console.log(data);
+                        let admin = false;
+                        // console.log(data.some( signedInUser.email));
+                        data.map(singleData => {
+                            //console.log(singleData);
+                            //console.log('Outside If',result.user.email, singleData.email);
+                            if (singleData.email === result.user.email) {
+                                console.log('Inside If', singleData.email, result.user.email);
+                                admin = true;
+                            }
+                        })
+                        if (admin === true) {
+                            const signedInUser = { name: displayName, email, admin: true }
+                            setLoggedInUser(signedInUser);
+                            storeAuthToken(admin);
+                        }
+                        else {
+                            const signedInUser = { name: displayName, email, admin: false }
+                            setLoggedInUser(signedInUser);
+                            storeAuthToken(admin);
+
+                        }
+                        //console.log(admin);
+                    })
+                    .catch(err => {
+
+                    });
+
                 //console.log(loggedInUser);
 
             }).catch((error) => {
@@ -69,13 +69,13 @@ const Login = () => {
 
     const storeAuthToken = (admin) => {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
-        .then(function(idToken) {
-            sessionStorage.setItem('token', idToken,'admin',admin);
-            sessionStorage.setItem('admin',admin);
-            history.replace(from);
-          }).catch(function(error) {
-            // Handle error
-          });
+            .then(function (idToken) {
+                sessionStorage.setItem('token', idToken, 'admin', admin);
+                sessionStorage.setItem('admin', admin);
+                history.replace(from);
+            }).catch(function (error) {
+                // Handle error
+            });
     }
 
 
@@ -85,8 +85,8 @@ const Login = () => {
             <h3>This is Login</h3>
             {
                 loggedInUser.email ?
-                <Link to='/dashboard'>Dashboard</Link> :
-                <button className="btn btn-danger" onClick={handleGoogleSignIn}>Login With Google</button>
+                    <Link to='/dashboard'>Dashboard</Link> :
+                    <button className="btn btn-danger" onClick={handleGoogleSignIn}>Login With Google</button>
 
             }
         </div>

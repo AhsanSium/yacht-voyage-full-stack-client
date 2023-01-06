@@ -7,7 +7,7 @@ import { SectionHeading as Heading, Subheading as SubheadingBase } from "../misc
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-7.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "../../images/svg-decorator-blob-8.svg";
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
-import  axios from 'axios';
+import axios from 'axios';
 import loadingImg from '../../images/loading2.gif';
 
 const Subheading = tw(SubheadingBase)`text-center`;
@@ -28,26 +28,26 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 export default ({
   subheading = "Review Section",
   heading = "Customer's Review",
-  loading,setLoading
+  loading, setLoading
 },
 ) => {
 
   const [testimonialsData, setTestimonialsData] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
-    // setYacht({loading:true})
-    setLoading(true);
+      // setYacht({loading:true})
+      setLoading(true);
 
-    const result = await axios(
-        'https://quiet-journey-44427.herokuapp.com/customer-reviews',
-        );
-        
-        setTestimonialsData(result&&result.data);
-        // console.log(result&&result.data);
-        setLoading(false);
+      const result = await axios(
+        'https://yacht-voyage-server.onrender.com/customer-reviews',
+      );
+
+      setTestimonialsData(result && result.data);
+      // console.log(result&&result.data);
+      setLoading(false);
     };
-    
+
     fetchData();
   }, [setTestimonialsData]);
 
@@ -58,25 +58,25 @@ export default ({
         <Heading>{heading}</Heading>
         {
           loading ?
-          <div>
-            <img style={{width:'40%', textAlign:'center'}} alt="" src={loadingImg} />
-          </div>
-          :
-          <Testimonials>
-            {testimonialsData&&testimonialsData.map((testimonial) => (
-              <TestimonialContainer key={testimonial._id}>
-                <Testimonial>
-                  <Image src={`data:image/jpeg;base64,${testimonial.image.img}`} />
-                  <Quote>"{testimonial.description}"</Quote>
-                  <div>
-                    <h4>{testimonial.rating}</h4>
-                    <StarIcon />
-                  </div>
-                  <CustomerName>- {testimonial.name}</CustomerName>
-                </Testimonial>
-              </TestimonialContainer>
-            ))}
-          </Testimonials>
+            <div>
+              <img style={{ width: '40%', textAlign: 'center' }} alt="" src={loadingImg} />
+            </div>
+            :
+            <Testimonials>
+              {testimonialsData && testimonialsData.map((testimonial) => (
+                <TestimonialContainer key={testimonial._id}>
+                  <Testimonial>
+                    <Image src={`data:image/jpeg;base64,${testimonial.image.img}`} />
+                    <Quote>"{testimonial.description}"</Quote>
+                    <div>
+                      <h4>{testimonial.rating}</h4>
+                      <StarIcon />
+                    </div>
+                    <CustomerName>- {testimonial.name}</CustomerName>
+                  </Testimonial>
+                </TestimonialContainer>
+              ))}
+            </Testimonials>
         }
       </ContentWithPaddingXl>
 

@@ -8,8 +8,8 @@ const Book = () => {
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const { yachtId } = useParams();
-    const [shippingData , setShippingData] = useState(null);
-    
+    const [shippingData, setShippingData] = useState(null);
+
     const [yacht, setYacht] = useState({
         id: '',
         isLoading: false,
@@ -22,7 +22,7 @@ const Book = () => {
         const newYacht = { ...yacht };
         newYacht.isLoading = true;
         newYacht.id = yachtId;
-        fetch('https://quiet-journey-44427.herokuapp.com/yachtById/' + yachtId)
+        fetch('https://yacht-voyage-server.onrender.com/yachtById/' + yachtId)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -43,21 +43,22 @@ const Book = () => {
 
     const handlePaymentSuccess = paymentId => {
 
-        const product = {name:name,price:price};
+        const product = { name: name, price: price };
 
         console.log(shippingData);
         const bookingDetails = {
-            status:'Pending',
-            username:loggedInUser.name,
-            email:loggedInUser.email,
-            product:product,
-            shipment:shippingData , 
-            id:id, 
-            orderTime:new Date(),
-            paymentId:paymentId};
+            status: 'Pending',
+            username: loggedInUser.name,
+            email: loggedInUser.email,
+            product: product,
+            shipment: shippingData,
+            id: id,
+            orderTime: new Date(),
+            paymentId: paymentId
+        };
         // const orderDetails = {products:product.data, shipment:data, user:loggedInUser, orderTime:new Date(), email:loggedInUser.email};
         console.log(bookingDetails);
-        fetch('https://quiet-journey-44427.herokuapp.com/bookYacht', {
+        fetch('https://yacht-voyage-server.onrender.com/bookYacht', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingDetails)
@@ -68,10 +69,10 @@ const Book = () => {
                     alert('Booking Placed');
                 }
             })
-            .catch(err=> {
+            .catch(err => {
                 console.log(err);
             })
-        };
+    };
 
     // const {bed, location, name, people, price, speed } = yacht&&yacht?.data;
     // console.log(yacht?.data.image.img);
@@ -118,64 +119,64 @@ const Book = () => {
 
             </div>
             <div className='row'>
-                <div style={{display: shippingData ? 'none' : 'block'}} className="col-md-12 mb-5 p-5 ms-3">
+                <div style={{ display: shippingData ? 'none' : 'block' }} className="col-md-12 mb-5 p-5 ms-3">
                     <h2>Your Shipment Info</h2>
-                <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="col-md-6">
-                        <label htmlFor="inputName" className="form-label">Name</label>
-                        <input type="text" className="form-control" id="inputName" placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="inputEmail" className="form-label">Email</label>
-                        
-                        {/* <input type="email" className="form-control" id="inputEmail" placeholder='E-mail' {...register("email", { required: true, maxLength: 20 })} /> */}
-
-                        <input
-                            id="inputEmail" placeholder='E-mail'
-                            className="form-control"
-                            type="email"
-                            {...register("email", {
-                            required: "Required",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: "invalid email address"
-                            }
-                            })}
-                        />
-                        
-                    </div>
-                    <div className="col-12">
-                        <label htmlFor="inputAddress" className="form-label">Address</label>
-                        <input type="text-area" className="form-control" id="inputAddress" placeholder="Main St"  {...register("address1", { required: true, maxLength: 20 })} />
-                    </div>
-                    <div className="col-12">
-                        <label htmlFor="inputAddress2" className="form-label">Address 2</label>
-                        <input type="text-area" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" {...register("address2", { required: true, maxLength: 20 })}/>
-                    </div>
-                    <div className="col-md-6">
-                        <label htmlFor="inputCity" className="form-label">City</label>
-                        <input type="text" className="form-control" id="inputCity" placeholder='City' {...register("city", { required: true, maxLength: 20 })}/>
-                    </div>
-                    
-                    <div className="col-md-6">
-                        <label htmlFor="inputZip" className="form-label">Zip</label>
-                        <input type="text" className="form-control" id="inputZip" placeholder='Zip' {...register("zip", { required: true, maxLength: 20 })}/>
-                    </div>
-                    <div className="col-12">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="gridCheck" {...register("check", { required: true, maxLength: 20 })}/>
-                            <label className="form-check-label d-flex" htmlFor="gridCheck">
-                                I Agree to the terms
-                            </label>
+                    <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
+                        <div className="col-md-6">
+                            <label htmlFor="inputName" className="form-label">Name</label>
+                            <input type="text" className="form-control" id="inputName" placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
                         </div>
-                    </div>
-                    <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                        <div className="col-md-6">
+                            <label htmlFor="inputEmail" className="form-label">Email</label>
+
+                            {/* <input type="email" className="form-control" id="inputEmail" placeholder='E-mail' {...register("email", { required: true, maxLength: 20 })} /> */}
+
+                            <input
+                                id="inputEmail" placeholder='E-mail'
+                                className="form-control"
+                                type="email"
+                                {...register("email", {
+                                    required: "Required",
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "invalid email address"
+                                    }
+                                })}
+                            />
+
+                        </div>
+                        <div className="col-12">
+                            <label htmlFor="inputAddress" className="form-label">Address</label>
+                            <input type="text-area" className="form-control" id="inputAddress" placeholder="Main St"  {...register("address1", { required: true, maxLength: 20 })} />
+                        </div>
+                        <div className="col-12">
+                            <label htmlFor="inputAddress2" className="form-label">Address 2</label>
+                            <input type="text-area" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" {...register("address2", { required: true, maxLength: 20 })} />
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="inputCity" className="form-label">City</label>
+                            <input type="text" className="form-control" id="inputCity" placeholder='City' {...register("city", { required: true, maxLength: 20 })} />
+                        </div>
+
+                        <div className="col-md-6">
+                            <label htmlFor="inputZip" className="form-label">Zip</label>
+                            <input type="text" className="form-control" id="inputZip" placeholder='Zip' {...register("zip", { required: true, maxLength: 20 })} />
+                        </div>
+                        <div className="col-12">
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="gridCheck" {...register("check", { required: true, maxLength: 20 })} />
+                                <label className="form-check-label d-flex" htmlFor="gridCheck">
+                                    I Agree to the terms
+                                </label>
+                            </div>
+                        </div>
+                        <div className="col-12">
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
 
                 </div>
-                
+
                 {/* <form className='form-group' onSubmit={handleSubmit(onSubmit)}>
                     <input placeholder='Name' {...register("name", { required: true, maxLength: 20 })} />
                     <input {...register("email", { required: true, maxLength: 20 })} />
@@ -183,10 +184,10 @@ const Book = () => {
                     <input type="submit" />
                 </form> */}
 
-                
-                <div style={{display: shippingData ? 'block' : 'none'}} className="col-md-12 mb-5 p-2">
+
+                <div style={{ display: shippingData ? 'block' : 'none' }} className="col-md-12 mb-5 p-2">
                     <h2>Make Payment</h2>
-                    <ProcessPayment style={{width:'200px', color:'white'}} handlePayment={handlePaymentSuccess}></ProcessPayment>
+                    <ProcessPayment style={{ width: '200px', color: 'white' }} handlePayment={handlePaymentSuccess}></ProcessPayment>
                 </div>
             </div>
         </div>

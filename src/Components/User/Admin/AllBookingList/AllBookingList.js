@@ -13,54 +13,54 @@ const AllBookingList = () => {
     });
 
 
-    useEffect(()=>{
-        setBookings({loading: true});
-        fetch('https://quiet-journey-44427.herokuapp.com/allBookings', {
-            method:'GET',
+    useEffect(() => {
+        setBookings({ loading: true });
+        fetch('https://yacht-voyage-server.onrender.com/allBookings', {
+            method: 'GET',
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            //console.log(bookings);
-            setBookings({loading:false, data:data})
-        });
-    },[])
+            .then(res => res.json())
+            .then(data => {
+                //console.log(bookings);
+                setBookings({ loading: false, data: data })
+            });
+    }, [])
 
-    const {id} = useParams();
+    const { id } = useParams();
 
     return (
         <div>
             <h3>This is All booking List</h3>
             <table className="table">
-                    {
-                        //console.log(bookings?.data)
-                    }
-                    <thead>
-                        <tr>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Order Time</th>
-                            <th scope="col">Status</th>
-                            {
-                                loggedInUser.admin &&
-                                <th scope="col">Change Status</th>
-                            }
-                        </tr>
-                    </thead>
-                   { bookings.loading === true ? 
-                   <h4>Loading Data:</h4>:
-                   <tbody>
+                {
+                    //console.log(bookings?.data)
+                }
+                <thead>
+                    <tr>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Order Time</th>
+                        <th scope="col">Status</th>
+                        {
+                            loggedInUser.admin &&
+                            <th scope="col">Change Status</th>
+                        }
+                    </tr>
+                </thead>
+                {bookings.loading === true ?
+                    <h4>Loading Data:</h4> :
+                    <tbody>
 
                         {
-                            bookings.data?.map(booking => <BookingTable key={booking._id} booking={booking} ></BookingTable> )
+                            bookings.data?.map(booking => <BookingTable key={booking._id} booking={booking} ></BookingTable>)
                         }
 
                     </tbody>
-                    }
-                </table>
+                }
+            </table>
         </div>
     );
 };

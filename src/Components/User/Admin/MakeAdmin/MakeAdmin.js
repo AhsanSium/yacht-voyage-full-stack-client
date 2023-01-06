@@ -14,22 +14,22 @@ const MakeAdmin = () => {
         const formData = new FormData()
         formData.append('email', admin);
 
-        const url = 'https://quiet-journey-44427.herokuapp.com/addAdmin';
+        const url = 'https://yacht-voyage-server.onrender.com/addAdmin';
 
         fetch(url, {
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            response.json()
-            alert('Admin Added');
-        })
-        .then(data => {
-          //console.log(data)
-        })
-        .catch(error => {
-          console.error(error)
-        })
+            .then(response => {
+                response.json()
+                alert('Admin Added');
+            })
+            .then(data => {
+                //console.log(data)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     return (
@@ -37,7 +37,7 @@ const MakeAdmin = () => {
             <h3>This is Make Admin</h3>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" onBlur={handleBlur} />
-                    <button onClick={handleAddAdmin} class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                <button onClick={handleAddAdmin} class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
             </div>
         </div>
     );

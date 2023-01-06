@@ -1,7 +1,7 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import {css} from "styled-components/macro"; //eslint-disable-line
+import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading as HeadingTitle, Subheading } from "../../Components/misc/Headings.js";
 import { PrimaryButton as PrimaryButtonBase } from "../../Components/misc/Buttons.js";
 import { ReactComponent as UserIcon } from "feather-icons/dist/icons/user.svg";
@@ -36,7 +36,7 @@ const Meta = styled.div`
 
 const Title = tw.h5`mt-4 leading-snug font-bold text-lg`;
 const Description = tw.p`mt-2 text-sm text-secondary-100`;
-const CustomLink = styled(PrimaryButtonBase).attrs({as: "a"})`
+const CustomLink = styled(PrimaryButtonBase).attrs({ as: "a" })`
   ${tw`inline-block mt-4 text-sm font-semibold`}
 `
 
@@ -47,10 +47,10 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25`;
 
-export default ({data, loading}) => {
+export default ({ data, loading }) => {
 
   const blogPosts = data;
-  
+
   return (
     <Container>
       <Content id="section1">
@@ -60,36 +60,36 @@ export default ({data, loading}) => {
         </HeadingInfoContainer>
         {
           loading ?
-          <div>
-            <img style={{width:'40%', textAlign:'center'}} alt="" src={loadingImg} />
-          </div>
-          :
-        <ThreeColumn>
-          {blogPosts.map(singleYacht => (
-            <Column key={singleYacht._id}>
-              <Card>
-                <Image imageSrc={`data:image/jpeg;base64,${singleYacht.image.img}`} />
-                <Details>
-                  <MetaContainer>
-                    <Meta>
-                      <UserIcon />
-                      <div>{singleYacht.people}</div>
-                    </Meta>
-                    <Meta>
-                      <TagIcon />
-                      <div>{singleYacht.speed}</div>
-                    </Meta>
-                  </MetaContainer>
-                  <Title>{singleYacht.name}</Title>
-                  <Description> $ <span tw="text-primary-500 font-medium">{singleYacht.price}</span></Description>
-                  <Link to={`/yachtBooking/${singleYacht._id}`}>
-                    <CustomLink>Book Now</CustomLink>                  
-                  </Link>
-                </Details>
-              </Card>
-            </Column>
-          ))}
-        </ThreeColumn>
+            <div>
+              <img style={{ width: '40%', textAlign: 'center' }} alt="" src={loadingImg} />
+            </div>
+            :
+            <ThreeColumn>
+              {blogPosts && blogPosts.map(singleYacht => (
+                <Column key={singleYacht._id}>
+                  <Card>
+                    <Image imageSrc={`data:image/jpeg;base64,${singleYacht.image.img}`} />
+                    <Details>
+                      <MetaContainer>
+                        <Meta>
+                          <UserIcon />
+                          <div>{singleYacht.people}</div>
+                        </Meta>
+                        <Meta>
+                          <TagIcon />
+                          <div>{singleYacht.speed}</div>
+                        </Meta>
+                      </MetaContainer>
+                      <Title>{singleYacht.name}</Title>
+                      <Description> $ <span tw="text-primary-500 font-medium">{singleYacht.price}</span></Description>
+                      <Link to={`/yachtBooking/${singleYacht._id}`}>
+                        <CustomLink>Book Now</CustomLink>
+                      </Link>
+                    </Details>
+                  </Card>
+                </Column>
+              ))}
+            </ThreeColumn>
         }
       </Content>
       <DecoratorBlob1 />

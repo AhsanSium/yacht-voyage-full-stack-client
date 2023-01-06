@@ -18,11 +18,11 @@ const UserReview = () => {
     }
 
     const handleBlur = (event) => {
-        if(event.target.value === null){
+        if (event.target.value === null) {
             alert('Unknown Value Try again');
         }
-        else{
-            
+        else {
+
             const newInfo = { ...info };
             //console.log(event.target.name, event.target.value);
             newInfo[event.target.name] = event.target.value;
@@ -39,8 +39,8 @@ const UserReview = () => {
         formData.append('name', info.name);
         formData.append('description', info.description);
         formData.append('rating', info.rating);
-        
-        const url = 'https://quiet-journey-44427.herokuapp.com/addReview';
+
+        const url = 'https://yacht-voyage-server.onrender.com/addReview';
         //console.log(image, info);
         // console.log(data);
         fetch(url, {
